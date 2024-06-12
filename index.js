@@ -69,6 +69,13 @@ async function run() {
       res.send(result);
     })
 
+    app.post('/work-sheet', async (req, res) => {
+      const newTask = req.body;
+      console.log(newTask);
+      const result = await jobCollection.insertOne(newTask);
+      res.send(result);
+    })
+
 
 
     // Send a ping to confirm a successful connection
