@@ -27,6 +27,7 @@ async function run() {
     // await client.connect();
 
     const employeeCollection = client.db('EM-Espial').collection('User');
+    const workCollection = client.db('EM-Espial').collection('work')
 
     app.post('/register', async (req, res) => {
       const employee = req.body;
@@ -60,7 +61,12 @@ async function run() {
       const query = {_id:new ObjectId(id)};
       const result = await employeeCollection.findOne(query);
       res.send(result);
-      
+    })
+
+    app.get('/work-sheet', async (req, res) => {
+      const cursor = workCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
     })
 
 
