@@ -72,7 +72,21 @@ async function run() {
     app.post('/work-sheet', async (req, res) => {
       const newTask = req.body;
       console.log(newTask);
-      const result = await jobCollection.insertOne(newTask);
+      const result = await workCollection.insertOne(newTask);
+      res.send(result);
+    })
+
+    app.patch('/registers/:id', async(req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) }
+      const updatedItem = req.body;
+      const item = {
+        $set: {
+          designation: updatedItem.designation,
+        }
+      }
+      
+      const result = await employeeCollection.updateOne(filter, item);
       res.send(result);
     })
 
