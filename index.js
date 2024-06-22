@@ -87,7 +87,6 @@ async function run() {
           designation: updatedItem.designation,
         }
       }
-      
       const result = await employeeCollection.updateOne(filter, item);
       res.send(result);
     })
