@@ -62,6 +62,30 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/register/admin/:email', async(req, res)=>{
+      const email = req.params.email;
+      console.log(email);
+      const query = {email: email};
+      const user = await employeeCollection.findOne(query);
+      let admin = false;
+      if(user){
+        admin = user?.designation === "Admin";
+      }
+      res.send({admin})
+    })
+
+    app.get('/register/hr/:email', async(req, res)=>{
+      const email = req.params.email;
+      console.log(email);
+      const query = {email: email};
+      const user = await employeeCollection.findOne(query);
+      let hr = false;
+      if(user){
+        hr = user?.designation === "HR";
+      }
+      res.send({hr})
+    })
+
     // Dashboard start
     app.get('/work-sheet', async (req, res) => {
       const cursor = workCollection.find();
